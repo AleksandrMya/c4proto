@@ -10,6 +10,7 @@ import ee.cone.c4assemble.TreeAssemblerTypes.Replace
 
 import scala.collection.immutable
 import scala.collection.immutable.{Map, Seq, TreeMap}
+import scala.collection.parallel.CollectionConverters._
 import scala.collection.parallel.immutable.ParVector
 import scala.concurrent.Future
 import scala.concurrent.ExecutionContext.Implicits.global
@@ -170,7 +171,7 @@ case class IndexUtilImpl()(
   def isParallel(options: AssembleOptions): Boolean = options.isParallel
 
   def mayBeParVector[V](iterable: immutable.Set[V], options: AssembleOptions): DPIterable[V] =
-    if(isParallel(options)) iterable.to[ParVector] else iterable
+    if(isParallel(options)) iterable.to(ParVector).par else iterable
 
   def mayBePar[V](iterable: immutable.Iterable[V], options: AssembleOptions): DPIterable[V] =
     if(isParallel(options)) iterable.par else iterable
