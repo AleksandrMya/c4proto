@@ -31,7 +31,7 @@ object Types {
   type Values[V] = Seq[V]
   type Each[V] = V
   type DMap[K,V] = Map[K,V] //ParMap[K,V]
-  type DPIterable[V] = GenIterable[V]
+  type DPIterable[V] = Iterable[V]
   trait Index //DMap[Any,DMultiSet]
   private object EmptyIndex extends Index
   private object EmptyReadModel extends ReadModelImpl(emptyDMap)
